@@ -1,7 +1,9 @@
 // const express = require("express");
 
 import express from "express";
+import dbConnect from './config/db/dbConnect.js';
 
+dbConnect();
 const app = express();
 
 const PORT = process.env.PORT || 5000;
