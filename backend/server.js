@@ -1,8 +1,11 @@
 // const express = require("express");
 
 import express from "express";
-import dbConnect from './config/db/dbConnect.js';
+import dbConnect from "./config/db/dbConnect.js";
+import dotenv from "dotenv";
 
+dotenv.config();
+// console.log(process.env);
 dbConnect();
 const app = express();
 
