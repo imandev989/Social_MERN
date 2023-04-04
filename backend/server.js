@@ -3,11 +3,13 @@
 import express from "express";
 import dbConnect from "./config/db/dbConnect.js";
 import dotenv from "dotenv";
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
 // console.log(process.env);
 dbConnect();
 const app = express();
+app.use(userRoute);
 
 const PORT = process.env.PORT || 5000;
 

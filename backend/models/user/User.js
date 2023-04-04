@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     accountVerificationToken: String,
-    accountVerificationTokenExpires: Data,
+    accountVerificationTokenExpires: Date,
     viewedBy: {
       type: [
         {
@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema(
         },
       ],
     },
-    passwordChangeAt: Data,
+    passwordChangeAt: Date,
     passwordResetToken: String,
     passwordResetExpire: Date,
     refreshToken: {
