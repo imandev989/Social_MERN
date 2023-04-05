@@ -9,6 +9,7 @@ dotenv.config();
 // console.log(process.env);
 dbConnect();
 const app = express();
+app.use(express.json());
 app.use(userRoute);
 
 const PORT = process.env.PORT || 5000;
