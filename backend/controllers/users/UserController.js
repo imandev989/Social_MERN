@@ -1,9 +1,10 @@
 import User from "../../models/user/User.js";
+import asyncHandler from "express-async-handler";
 
-export const userRegister = async (req, res) => {
+export const userRegister = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists) {
-    return res.json("این کاربر قبلا ثبت نام کرده است");
+    throw new Error("این کاربر قبلا ثبت نام کرده است");
   }
   try {
     const user = await User.create({
@@ -16,4 +17,4 @@ export const userRegister = async (req, res) => {
   } catch (error) {
     res.json(error);
   }
-};
+});
