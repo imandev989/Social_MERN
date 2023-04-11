@@ -18,3 +18,11 @@ export const userRegister = asyncHandler(async (req, res) => {
     res.json(error);
   }
 });
+
+export const userLogin = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ email: req?.body?.email });
+  if (!user) {
+    throw new Error(`این کاربر وجود ندارد`);
+  }
+  res.json("شما وارد شدید");
+});
