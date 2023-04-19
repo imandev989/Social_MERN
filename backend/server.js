@@ -4,6 +4,7 @@ import express from "express";
 import dbConnect from "./config/db/dbConnect.js";
 import dotenv from "dotenv";
 import userRoute from "./routes/userRoute.js";
+import cookieParser from "cookie-parser"
 import { errorHandler, notFound } from "./middleware/error/errorHandler.js";
 
 dotenv.config();
@@ -11,6 +12,9 @@ dotenv.config();
 dbConnect();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
+
+// Routes
 app.use(userRoute);
 
 //error handler
