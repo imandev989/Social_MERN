@@ -2,6 +2,17 @@ import User from "../../models/user/User.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
+
+export const getUsers = asyncHandler(async(req,res)=>{
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.json(error);
+  }
+})
+
+
 export const userRegister = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists) {
@@ -61,6 +72,10 @@ export const userLogin = asyncHandler(async (req, res) => {
         expiresIn: "1d",
       }
     );
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     res.json({
       userId,
       firstName,
@@ -69,9 +84,11 @@ export const userLogin = asyncHandler(async (req, res) => {
       profilePhoto,
       admin,
       isAccountVerified,
+      accessToken,
+      refreshToken,
     });
   } else {
     res.status(401);
-    throw new Error("کاربر وجود ندارد");
+    throw new Error("ایمیل یا پسورد صحیح نیست");
   }
 });
