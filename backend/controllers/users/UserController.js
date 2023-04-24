@@ -1,6 +1,7 @@
 import User from "../../models/user/User.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
+import { syncIndexes } from "mongoose";
 
 export const getUsers = asyncHandler(async (req, res) => {
   try {
@@ -89,4 +90,20 @@ export const userLogin = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("ایمیل یا پسورد صحیح نیست");
   }
+});
+
+export const deleteUser = asyncHandler(async (req, res) => {
+  // console.log(req.params.id);
+  // const {id} = req.params;
+  // if(!id) throw new Error("شما شناسه را وارد نکردید");
+
+  const id = req.params.id;
+  try {
+    const user = await User.findByIdAndDelete(id);
+    res.json(user);
+  } catch (error) {
+    res.json(error);
+  }
+
+  res.send("delete User");
 });
