@@ -107,3 +107,14 @@ export const deleteUser = asyncHandler(async (req, res) => {
 
   res.send("delete User");
 });
+
+export const detailUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findById(id);
+    res.json(user);
+  } catch (error) {
+    res.json(error);
+  }
+});
